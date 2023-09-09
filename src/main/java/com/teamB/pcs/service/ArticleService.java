@@ -1,7 +1,9 @@
 package com.teamB.pcs.service;
 
 import com.teamB.pcs.domain.Article;
+import com.teamB.pcs.domain.Tag;
 import com.teamB.pcs.dto.request.ArticleRequest;
+import com.teamB.pcs.dto.request.ArticleSaveRequestDto;
 import com.teamB.pcs.dto.response.ArticleListResponse;
 import com.teamB.pcs.dto.response.ArticleResponse;
 import com.teamB.pcs.repository.ArticleRepository;
@@ -16,6 +18,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ArticleService {
     private final ArticleRepository articleRepository;
+
+    public void create(ArticleSaveRequestDto request) {
+        List<Tag> tags = Tag.create(request.tags());
+        Article article = request.toEntity(request.title(), request.description(), request.body(), tags);
+        articleRepository.save(article);
+    }
 
     public ArticleListResponse getAll() {
         List<ArticleResponse> articleResponses = articleRepository.findAll().stream()
