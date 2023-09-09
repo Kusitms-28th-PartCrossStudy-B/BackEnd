@@ -1,6 +1,7 @@
 package com.teamB.pcs.dto.response;
 
 import com.teamB.pcs.domain.Article;
+import com.teamB.pcs.domain.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,7 @@ public class ArticleResponse {
 
     private String body;
 
-    private List<String> tagList;
+    private List<Tag> tagList;
 
     private LocalDateTime createdAt;//반환할때 LocalDateTime으로 해도되나?
 
@@ -29,7 +30,7 @@ public class ArticleResponse {
         title=article.getTitle();
         description=article.getDescription();
         body=article.getBody();
-        tagList=article.getTagList();
+        tagList=article.getTags();
         createdAt=article.getCreatedAt();
         updatedAt=article.getUpdatedAt();
     }

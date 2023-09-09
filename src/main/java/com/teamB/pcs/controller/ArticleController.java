@@ -1,10 +1,13 @@
 package com.teamB.pcs.controller;
 
+import com.teamB.pcs.common.dto.ResponseDto;
 import com.teamB.pcs.dto.request.ArticleRequest;
+import com.teamB.pcs.dto.request.ArticleSaveRequestDto;
 import com.teamB.pcs.dto.response.ArticleListResponse;
 import com.teamB.pcs.dto.response.ArticleResponse;
 import com.teamB.pcs.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +24,10 @@ public class ArticleController {
         return articleService.getAll();
     }
 
-    @PostMapping("")
-    public void create(@RequestBody ArticleRequest articleRequest){
-        articleService.create(articleRequest);
+    @PostMapping()
+    public ResponseEntity<Void> create(@RequestBody ArticleSaveRequestDto articleSaveRequestDto){
+        articleService.create(articleSaveRequestDto);
+        return ResponseDto.noContent();
     }
 
     @GetMapping("/{articleId}")
