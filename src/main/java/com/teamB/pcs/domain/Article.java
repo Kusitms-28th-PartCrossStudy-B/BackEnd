@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,4 +34,17 @@ public class Article {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Builder
+    public Article(String title, String description, String body) {//태그도 추가되게해야됨
+        this.title = title;
+        this.description = description;
+        this.body = body;
+    }
+
+    public void update(String title, String description, String body) {
+        this.title = title;
+        this.description = description;
+        this.body = body;
+    }
 }

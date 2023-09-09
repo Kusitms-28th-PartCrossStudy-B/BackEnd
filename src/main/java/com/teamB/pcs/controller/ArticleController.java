@@ -1,6 +1,7 @@
 package com.teamB.pcs.controller;
 
 import com.teamB.pcs.dto.request.ArticleRequest;
+import com.teamB.pcs.dto.response.ArticleListResponse;
 import com.teamB.pcs.dto.response.ArticleResponse;
 import com.teamB.pcs.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +17,13 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("")
-    public List<ArticleResponse> getAll(){
+    public ArticleListResponse getAll(){
         return articleService.getAll();
     }
 
-    @PostMapping("/{articleId}")
-    public void create(@PathVariable Long articleId, @RequestBody ArticleRequest articleRequest){
-        return articleService.create(articleId, articleRequest);
+    @PostMapping("")
+    public void create(@RequestBody ArticleRequest articleRequest){
+        articleService.create(articleRequest);
     }
 
     @GetMapping("/{articleId}")
@@ -32,11 +33,11 @@ public class ArticleController {
 
     @PutMapping("/{articleId}")
     public void update(@PathVariable Long articleId, @RequestBody ArticleRequest articleRequest){
-        return articleService.update(articleId, articleRequest);
+        articleService.update(articleId, articleRequest);
     }
 
     @DeleteMapping("/{articleId}")
     public void delete(@PathVariable Long articleId){
-        return articleService.delete(articleId);
+        articleService.delete(articleId);
     }
 }
